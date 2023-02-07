@@ -1,0 +1,39 @@
+.data
+	MSG_word: .asciiz "input word: (10 chars): "
+	MSG_key: .asciiz "input key: (<26)"
+
+.text
+.globl main
+
+main:
+	#Dynamic allocation
+	li $v0, 9
+	li $a0, 10
+	syscall
+	move $7, $v0
+	
+	#input request
+	li $v0, 4
+	la $a0, MSG_word
+	syscall
+	#user input
+	li $v0, 6
+	li $a0, 0
+	add $a0, $a0, $s7
+	li $a1, 10 
+	syscall
+	#saving user input WORD into $s0
+	move $s0, $v0
+	#input request
+	li $v0, 4
+	la $a0, MSG_key
+	syscall
+	#user input
+	li $v0, 5
+	syscall
+	#saving user input KEY into $s0
+	move $s0, $v0
+	
+
+
+	
